@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Netflix Dataset Analysis</title>
+    <style>
+        table.data {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table.data th, table.data td {
+            border: 1.1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Netflix Dataset Analysis</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            <h2>Sort Dataset</h2>
+            {{ sort_form.as_p }}
+            <input type="hidden" name="action" value="sort">
+            <button type="submit">Sort</button>
+        </form>
+
+        <form method="post">
+            {% csrf_token %}
+            <h2>Search Dataset</h2>
+            {{ search_form.as_p }}
+            <input type="hidden" name="action" value="search">
+            <button type="submit">Search</button>
+        </form>
+
+        <h2>Results</h2>
+        <table class="data">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Country</th>
+                    <th>Release Year</th>
+                    <th>Duration</th>
+                    <th>Genre</th>
+                    <th>Director</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in result %}
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.type }}</td>
+                    <td>{{ item.country }}</td>
+                    <td>{{ item.release_year }}</td>
+                    <td>{{ item.duration }}</td>
+                    <td>{{ item.genre }}</td>
+                    <td>{{ item.director }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
